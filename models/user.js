@@ -1,8 +1,9 @@
-const { DataTypes } = require('sequelize');
 const sequelize = require('./index')
+const { DataTypes, Model } = require('sequelize');
 
-const User = sequelize.define('user', {
+class User extends Model {}
 
+User.init({
   firstName: {
     type: DataTypes.STRING,
     allowNull: false
@@ -11,7 +12,8 @@ const User = sequelize.define('user', {
     type: DataTypes.STRING
   }
 }, {
-    tableName:'Users'//optional
+  sequelize, // We need to pass the connection instance
+  modelName: 'User' // We need to choose the model name
 });
 console.log(User === sequelize.models.User); // true
 module.exports = User;
