@@ -1,6 +1,5 @@
+const { Sequelize , DataTypes , Model} = require('sequelize');
 require('dotenv').config();
-const { Sequelize } = require('sequelize');
-
 const sequelize = new Sequelize('node_sequelize_api', 'root', process.env.PASSWORD, {
     host: 'localhost',
     dialect:'mysql'
@@ -12,4 +11,13 @@ try {
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }
-  module.exports = sequelize;
+
+  const db = {};
+  db.Sequelize = Sequelize;
+  db.sequelize = sequelize;
+
+  db.contact = require('./contact')( sequelize , DataTypes);
+  db.user = require('./user')(Model , sequelize , DataTypes);
+  db.sequelize.sync({force:true});
+  
+  module.exports = db;

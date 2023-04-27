@@ -1,6 +1,4 @@
-const sequelize = require('./index')
-const { DataTypes, Model } = require('sequelize');
-
+module.exports = (Model , sequelize , DataTypes) => {
 class User extends Model {}
 
 User.init({
@@ -16,4 +14,4 @@ User.init({
   modelName: 'User' // We need to choose the model name
 });
 console.log(User === sequelize.models.User); // true
-module.exports = User;
+}
