@@ -8,4 +8,5 @@ const Contact = sequelize.define('contact', {
     type: DataTypes.STRING
   }
 });
+return Contact;
 }
