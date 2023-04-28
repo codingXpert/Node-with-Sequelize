@@ -10,7 +10,8 @@ var addUser = async(req , res) => {
     jane.set({firstName: "Sohan" , lastName:'singh'});
     await jane.update({ firstName: "Mohit" , lastName:'singh' })
     await jane.save() // in case of update we can use save() with update()
-    await jane.destroy();
+    // await jane.destroy();
+    await jane.reload();
     res.status(200).json(jane.toJSON());
 }
 
