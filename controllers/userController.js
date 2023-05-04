@@ -1,4 +1,5 @@
 const db = require('../models');
+const {Sequelize} = require('sequelize');
 const User = db.user;
 
 //Add User
@@ -19,7 +20,8 @@ var addUser = async (req, res) => {
 //Get Users
 var getUsers = async (req, res) => {
     const users = await User.findAll({
-        attributes:[['firstName' , 'Name'] , 'lastName']
+        attributes:[//['firstName'  , 'lastName'],
+        [Sequelize.fn('COUNT', Sequelize.col('id')), 'count']]
     });
     res.status(200).json(users);
 }
