@@ -28,6 +28,7 @@ var getUser = async (req, res) => {
     res.status(200).json(users);
 }
 
+// Inserting into db
 var postUser = async (req , res) => {
     var postData = req.body;
     if(typeof(postData ===[])){    
@@ -38,9 +39,19 @@ var postUser = async (req , res) => {
     res.status(200).json(user);
 }
 
+//delete
+var deleteUser = async (req , res) => {
+    const userId = req.params.id
+    const user = await User.destroy({
+        where:{id:userId}
+    });
+    res.status(200).json(user);
+}
+
 module.exports = {
     addUser,
     getUsers,
     getUser,
-    postUser
+    postUser,
+    deleteUser
 }

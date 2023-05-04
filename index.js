@@ -15,6 +15,7 @@ app.get('/add', userCtrl.addUser);
 app.get('/users', userCtrl.getUsers);
 app.get('/user/:id' , userCtrl.getUser);
 app.post('/postUser' , userCtrl.postUser);
+app.delete('/deleteUser/:id' , userCtrl.deleteUser)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
