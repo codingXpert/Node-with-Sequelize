@@ -17,12 +17,19 @@ var addUser = async (req, res) => {
 }
 
 //Get Users
-var getUsers = async(req , res) => {
-const users = await User.findAll({});
-res.status(200).json(users);
+var getUsers = async (req, res) => {
+    const users = await User.findAll({});
+    res.status(200).json(users);
+}
+
+// get user by id 
+var getUser = async (req, res) => {
+    const users = await User.findOne({where:{id:req.params.id}});
+    res.status(200).json(users);
 }
 
 module.exports = {
     addUser,
-    getUsers
+    getUsers,
+    getUser
 }
