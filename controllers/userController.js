@@ -18,7 +18,9 @@ var addUser = async (req, res) => {
 
 //Get Users
 var getUsers = async (req, res) => {
-    const users = await User.findAll({});
+    const users = await User.findAll({
+        attributes:['firstName' , 'lastName']
+    });
     res.status(200).json(users);
 }
 
@@ -27,7 +29,7 @@ var getUser = async (req, res) => {
     const users = await User.findOne({where:{id:req.params.id}});
     res.status(200).json(users);
 }
-
+//Add user
 // Inserting into db
 var postUser = async (req , res) => {
     var postData = req.body;
