@@ -1,20 +1,28 @@
 const db = require('../models');
 const User = db.user;
-var addUser = async(req , res) => {
 
-     const jane = await User.create({ firstName: "Jane" , lastName:'singh'});
-    console.log(jane instanceof User); 
-    console.log(jane.firstName); 
+//Add User
+var addUser = async (req, res) => {
+    const jane = await User.create({ firstName: "Jane", lastName: 'singh' });
+    console.log(jane instanceof User);
+    console.log(jane.firstName);
 
 
-    jane.set({firstName: "Sohan" , lastName:'singh'});
-    await jane.update({ firstName: "Mohit" , lastName:'singh' })
+    jane.set({ firstName: "Sohan", lastName: 'singh' });
+    await jane.update({ firstName: "Mohit", lastName: 'singh' })
     await jane.save() // in case of update we can use save() with update()
     // await jane.destroy();
     await jane.reload();
     res.status(200).json(jane.toJSON());
 }
 
+//Get Users
+var getUsers = async(req , res) => {
+const users = await User.findAll({});
+res.status(200).json(users);
+}
+
 module.exports = {
-    addUser
+    addUser,
+    getUsers
 }

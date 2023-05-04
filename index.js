@@ -12,6 +12,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/add', userCtrl.addUser);
+app.get('/users', userCtrl.getUsers);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
