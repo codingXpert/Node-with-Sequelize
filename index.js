@@ -14,6 +14,7 @@ app.get('/', (req, res) => {
 app.get('/add', userCtrl.addUser);
 app.get('/users', userCtrl.getUsers);
 app.get('/user/:id' , userCtrl.getUser);
+app.post('/postUser' , userCtrl.postUser);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

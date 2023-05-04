@@ -28,8 +28,15 @@ var getUser = async (req, res) => {
     res.status(200).json(users);
 }
 
+var postUser = async (req , res) => {
+    var postData = req.body;
+    const user = await User.create(postData);
+    res.status(200).json(user);
+}
+
 module.exports = {
     addUser,
     getUsers,
-    getUser
+    getUser,
+    postUser
 }
