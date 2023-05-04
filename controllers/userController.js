@@ -30,7 +30,11 @@ var getUser = async (req, res) => {
 
 var postUser = async (req , res) => {
     var postData = req.body;
-    const user = await User.create(postData);
+    if(typeof(postData ===[])){    
+    var user = await User.bulkCreate(postData);  // for bulk insertion/creation. ex:-[{},{}]
+    }else{
+    var user = await User.create(postData);  // for single insertion/creation
+    }
     res.status(200).json(user);
 }
 
