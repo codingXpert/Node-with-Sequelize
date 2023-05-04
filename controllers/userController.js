@@ -48,10 +48,20 @@ var deleteUser = async (req , res) => {
     res.status(200).json(user);
 }
 
+//update user
+var patchUser = async (req , res) => {
+    const userId = req.params.id;
+    const updatedData = req.body;
+    const user = await User.update(updatedData,{
+        where:{id:userId}
+    });
+    res.status(200).json(user);
+}
 module.exports = {
     addUser,
     getUsers,
     getUser,
     postUser,
-    deleteUser
+    deleteUser,
+    patchUser
 }
