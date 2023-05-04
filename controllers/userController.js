@@ -20,9 +20,7 @@ var addUser = async (req, res) => {
 //Get Users
 var getUsers = async (req, res) => {
     const users = await User.findAll({
-        attributes:[//['firstName'  , 'lastName'],
-        [Sequelize.fn('SUM', Sequelize.col('id')), 'count']
-    ]
+        attributes:{ exclude: ['lastName' , 'updatedAt'] },
     });
     res.status(200).json(users);
 }
