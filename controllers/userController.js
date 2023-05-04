@@ -19,7 +19,7 @@ var addUser = async (req, res) => {
 //Get Users
 var getUsers = async (req, res) => {
     const users = await User.findAll({
-        attributes:['firstName' , 'lastName']
+        attributes:[['firstName' , 'Name'] , 'lastName']
     });
     res.status(200).json(users);
 }
