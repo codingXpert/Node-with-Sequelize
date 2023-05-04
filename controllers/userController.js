@@ -21,7 +21,8 @@ var addUser = async (req, res) => {
 var getUsers = async (req, res) => {
     const users = await User.findAll({
         attributes:[//['firstName'  , 'lastName'],
-        [Sequelize.fn('COUNT', Sequelize.col('id')), 'count']]
+        [Sequelize.fn('SUM', Sequelize.col('id')), 'count']
+    ]
     });
     res.status(200).json(users);
 }
