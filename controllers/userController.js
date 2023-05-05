@@ -91,6 +91,13 @@ var finderUser = async (req, res) => {
       res.status(200).json({data:rows,count:count});
 }
 
+var getSetVirtual = async (req , res) => {
+    const  rows  = await User.findAll({
+        where:{lastName:'Kumar'}
+    });
+      res.status(200).json({data:rows});
+}
+
 module.exports = {
     addUser,
     getUsers,
@@ -98,5 +105,6 @@ module.exports = {
     postUser,
     deleteUser,
     patchUser,
-    finderUser
+    finderUser,
+    getSetVirtual
 }
