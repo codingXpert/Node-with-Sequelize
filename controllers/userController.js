@@ -20,9 +20,10 @@ var addUser = async (req, res) => {
 //Get Users
 var getUsers = async (req, res) => {
     const users = await User.findAll({
-        attributes:{ exclude: ['lastName' , 'updatedAt'],
-        include:['id']
-     }
+        order: [
+            // Will escape title and validate DESC against a list of valid direction parameters
+            ['firstName', 'DESC'],
+        ]
     });
     res.status(200).json(users);
 }
@@ -48,10 +49,9 @@ var getUser = async (req, res) => {
 // Inserting into db
 var postUser = async (req , res) => {
     var postData = req.body;
-    if(typeof(postData === [])){    
+    if(postData.length>1){    
     var user = await User.bulkCreate(postData);  // for bulk insertion/creation. ex:-[{},{}]
-    }
-    if(typeof(postData === {})){
+    }else{
     var user = await User.create(postData);  // for single insertion/creation
     }
     res.status(200).json(user);
