@@ -30,12 +30,15 @@ var getUsers = async (req, res) => {
 // get user by id 
 var getUser = async (req, res) => {
     //const users = await User.findOne({where:{id:req.params.id}});
-    
+
     // This code is exectly similar as the above line
     const users = await User.findOne({
         where: {
           id: {
-            [Op.eq]: 2
+            [Op.and]: [
+                { id: 3 },
+                { firstName: 'Deeepak' }
+              ]
           }
         }
       });
