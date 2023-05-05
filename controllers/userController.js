@@ -79,13 +79,16 @@ var patchUser = async (req , res) => {
 }
 
 var finderUser = async (req, res) => {
-    const [user, created] = await User.findOrCreate({    // if record already exist it return record & we receives created:false
-        where: { firstName: 'monu' },                   // // if record doesn't exist it creates record & we receives created:true
-        defaults: {
-          lastName: 'kumar'
-        }
+    const { count, rows } = await User.findAndCountAll({
+        where: {
+          lastName: {
+            [Op.like]: '%Kumar'
+          }
+        },
+        offset: 0,
+        limit: 10
       });
-      res.status(200).json({data:user,created:created});
+      res.status(200).json({data:rows,count:count});
 }
 
 module.exports = {
