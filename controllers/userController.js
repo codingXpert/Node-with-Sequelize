@@ -22,8 +22,10 @@ var getUsers = async (req, res) => {
     const users = await User.findAll({
         order: [
             // Will escape title and validate DESC against a list of valid direction parameters
-            ['firstName', 'DESC'],
-        ]
+            ['id', 'ASC'],
+        ],
+        offset: 5,  //skip
+        limit: 5
     });
     res.status(200).json(users);
 }
