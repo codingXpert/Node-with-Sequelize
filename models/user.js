@@ -11,7 +11,10 @@ User.init({
     }
   },
   lastName: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    set(value) {
+      this.setDataValue('lastName', value + ' ,Indian');
+    }
   }
 }, {
   sequelize, // We need to pass the connection instance
