@@ -79,9 +79,7 @@ var patchUser = async (req , res) => {
 }
 
 var finderUser = async (req, res) => {
-    const users = await User.findOne({
-        where:{lastName:'kumar'}         // fetches the first record amoung all the records whose lastName is kumar
-    });
+    const users = await User.findByPk(4);
     res.status(200).json(users);
 }
 
