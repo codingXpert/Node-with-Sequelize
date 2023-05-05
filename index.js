@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 require('./models/index');
 const app = express()
 var userCtrl = require('./controllers/userController')
-const port = 3000
+const port = 3001
 
 app.use(bodyParser.json()); 
 
