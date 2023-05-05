@@ -60,7 +60,7 @@ var postUser = async (req , res) => {
 var deleteUser = async (req , res) => {
     const userId = req.params.id
     const user = await User.destroy({
-        where:{id:userId}
+        truncate: true    //delets all the available data
     });
     res.status(200).json(user);
 }
