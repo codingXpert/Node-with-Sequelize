@@ -77,11 +77,20 @@ var patchUser = async (req , res) => {
     });
     res.status(200).json(user);
 }
+
+var finderUser = async (req, res) => {
+    const users = await User.findOne({
+        where:{lastName:'kumar'}         // fetches the first record amoung all the records whose lastName is kumar
+    });
+    res.status(200).json(users);
+}
+
 module.exports = {
     addUser,
     getUsers,
     getUser,
     postUser,
     deleteUser,
-    patchUser
+    patchUser,
+    finderUser
 }
