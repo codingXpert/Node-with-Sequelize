@@ -121,9 +121,9 @@ var getSetVirtual = async (req, res) => {
 
 var rawQueries = async (req, res) => {
     const users = await db.sequelize.query(
-      "SELECT * FROM Users WHERE lastName LIKE :search_name",
+      "SELECT * FROM Users WHERE id=$id",
       {
-        replacements: { search_name: 'ku%' },
+          bind: { id: '8' },
         type: QueryTypes.SELECT,
       }
     );
