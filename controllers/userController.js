@@ -120,12 +120,11 @@ var getSetVirtual = async (req, res) => {
 }
 
 var rawQueries = async (req, res) => {
-    const users = await db.sequelize.query("SELECT * FROM Users WHERE id = ?", {
-      replacements: ["1"],
-      type: QueryTypes.SELECT,
-      model: User,
-      mapToModel: true,
-    });
+    const users = await db.sequelize.query('SELECT * FROM Users WHERE id IN(:id)',
+        {
+            replacements: {id: ['1', '8'] },
+            type: QueryTypes.SELECT
+        });
   res.status(200).json({ data: users });
 };
 
