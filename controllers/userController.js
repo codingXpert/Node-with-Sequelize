@@ -1,5 +1,5 @@
 const db = require('../models');
-const { Sequelize, Op } = require('sequelize');
+const { Sequelize, Op, QueryTypes } = require("sequelize");
 const User = db.user;
 
 //Add User
@@ -34,7 +34,7 @@ var getUsers = async (req, res) => {
 var getUser = async (req, res) => {
     //const users = await User.findOne({where:{id:req.params.id}});
 
-    // This code is exectly similar as the above line
+    // This code is exactly similar as the above line
     const users = await User.findOne({
         where: {
             id: {
@@ -63,17 +63,17 @@ var postUser = async (req, res) => {
     }catch(e) {
         let message;
         e.errors.forEach(error => {
-            switch (error.validateorKey) {
-                case 'isAlpha':
-                    message = error.message;
-                    break;
-                case 'IsLowercase':
-                    message = 'only lower case is allowed';
-                    break;
-                case 'len':
-                    message = 'min 2 char max 10 char is allowed'
-                    break;
-            }
+            // switch (error.validateorKey) {
+            //     case 'isAlpha':
+            //         message = error.message;
+            //         break;
+            //     case 'IsLowercase':
+            //         message = 'only lower case is allowed';
+            //         break;
+            //     case 'len':
+            //         message = 'min 2 char max 10 char is allowed'
+            //         break;
+            // }
             messages[error.path] = message; // error.path means from where the error is generating i.e firstName or lastName
         });
     }
@@ -119,18 +119,21 @@ var getSetVirtual = async (req, res) => {
     res.status(200).json({ data: rows });
 }
 
-var validateUser = async (req, res) => {
-
-}
+var rawQueries = async (req, res) => {
+  const users = await db.sequelize.query("SELECT * FROM `Users`", {
+    type: QueryTypes.SELECT,
+  });
+  res.status(200).json({ data: users });
+};
 
 module.exports = {
-    addUser,
-    getUsers,
-    getUser,
-    postUser,
-    deleteUser,
-    patchUser,
-    finderUser,
-    getSetVirtual,
-    validateUser
-}
+  addUser,
+  getUsers,
+  getUser,
+  postUser,
+  deleteUser,
+  patchUser,
+  finderUser,
+  getSetVirtual,
+  rawQueries,
+};

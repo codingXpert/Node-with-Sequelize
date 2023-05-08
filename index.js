@@ -19,7 +19,8 @@ app.delete('/delete' , userCtrl.deleteUser);
 app.patch('/patch/:id' , userCtrl.patchUser);
 app.get('/finders' , userCtrl.finderUser);
 app.get('/get-set-virtual' , userCtrl.getSetVirtual);
-app.get('/validate' , userCtrl.validateUser);
+app.get('/raw-queries', userCtrl.rawQueries);
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
