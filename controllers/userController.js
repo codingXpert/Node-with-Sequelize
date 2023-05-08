@@ -122,6 +122,8 @@ var getSetVirtual = async (req, res) => {
 var rawQueries = async (req, res) => {
   const users = await db.sequelize.query("SELECT * FROM `Users`", {
     type: QueryTypes.SELECT,
+    model: User,
+    mapToModel: true,
   });
   res.status(200).json({ data: users });
 };
