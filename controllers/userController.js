@@ -159,11 +159,22 @@ var oneToOne = async(req , res) => {
      include: [{
         model:Posts,
         as:'postDetail',
-        attributes:['title' , ['name' , 'postName']]   //name as postName
+        attributes:['title' , ['name' , 'postName']]   // accessing name as postName
      }],
      where:{id:1}
    });
     res.status(200).json(data);
+}
+
+var belongsTo = async(req , res) => {
+    let posts = await Posts.findAll({
+        attributes:['title' , 'name'],
+        include:[{
+            model:User,
+            attributes:['firstName' , 'lastName']
+        }]
+    });
+    res.status(200).json(posts);
 }
 
 module.exports = {
@@ -177,5 +188,6 @@ module.exports = {
   getSetVirtual,
   rawQueries,
   validationCont,
-  oneToOne
+  oneToOne,
+  belongsTo
 };

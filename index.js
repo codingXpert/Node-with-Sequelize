@@ -21,7 +21,8 @@ app.get('/finders' , userCtrl.finderUser);
 app.get('/get-set-virtual' , userCtrl.getSetVirtual);
 app.get('/validation' , userCtrl.validationCont);
 app.get('/raw-queries', userCtrl.rawQueries);
-app.get('/one-to-one' , userCtrl.oneToOne)
+app.get('/one-to-one' , userCtrl.oneToOne);
+app.get("/belongTo", userCtrl.belongsTo);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
