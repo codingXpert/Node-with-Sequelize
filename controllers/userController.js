@@ -158,6 +158,7 @@ var oneToOne = async(req , res) => {
     attributes:['firstName' , 'gender'],
      include: [{
         model:Posts,
+        as:'postDetail',
         attributes:['title' , ['name' , 'postName']]   //name as postName
      }],
      where:{id:1}
