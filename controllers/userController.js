@@ -155,7 +155,12 @@ var validationCont = async(req,res) => {
 
 var oneToOne = async(req , res) => {
    let data = await User.findAll({
-     include: Posts,
+    attributes:['firstName' , 'gender'],
+     include: [{
+        model:Posts,
+        attributes:['title' , ['name' , 'postName']]   //name as postName
+     }],
+     where:{id:1}
    });
     res.status(200).json(data);
 }
