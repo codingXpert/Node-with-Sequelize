@@ -6,7 +6,8 @@ const Contact = sequelize.define('contact', {
   },
   current_address: {
     type: DataTypes.STRING
-  }
+  },
+  user_id:DataTypes.INTEGER 
 });
 return Contact;
 }

@@ -130,6 +130,28 @@ var rawQueries = async (req, res) => {
   res.status(200).json({ data: users });
 };
 
+var validationCont = async(req,res) => {
+    try {
+        let data = await User.create({firstName: "Mohit" ,lastName: "User" , gender: 'male' });
+    } catch (e) {
+        const messages = {};
+        e.errors.forEach((error) => {
+            let message;
+            switch(error.validateorKey){
+                case 'not_unique' :
+                    message = 'Duplicate Email'
+                    break;
+
+                case 'isIn' :
+                    message = 'gender not in male/female'
+                    break;
+            }
+            messages[error.path] = message;
+            console.log(messages)
+        })
+    }
+}
+
 module.exports = {
   addUser,
   getUsers,
@@ -140,4 +162,5 @@ module.exports = {
   finderUser,
   getSetVirtual,
   rawQueries,
+  validationCont
 };
