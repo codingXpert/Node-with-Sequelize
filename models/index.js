@@ -7,7 +7,7 @@ const sequelize = new Sequelize(
   {
     host: "localhost",
     dialect: "mysql",
-    logging: false,
+    logging: true,
   }
 );
 
@@ -24,9 +24,10 @@ db.sequelize = sequelize;
 
 db.user = require("./user")(Model, sequelize, DataTypes);
 db.contact = require("./contact")(sequelize, DataTypes);
+db.posts = require("./posts")(sequelize, DataTypes);
 
-db.user.hasOne(db.contact);
-db.contact.belongsTo(db.user);
+db.user.hasOne(db.posts , {foreignKey:'userId'});
+db.posts.belongsTo(db.user, { foreignKey: "userId" });
 
 db.sequelize.sync({ force: false });
 

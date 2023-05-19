@@ -1,6 +1,7 @@
 const db = require('../models');
 const { Sequelize, Op, QueryTypes } = require("sequelize");
 const User = db.user;
+const Posts = db.posts;
 
 //Add User
 var addUser = async (req, res) => {
@@ -152,6 +153,13 @@ var validationCont = async(req,res) => {
     }
 }
 
+var oneToOne = async(req , res) => {
+   let data = await User.findAll({
+     include: Posts,
+   });
+    res.status(200).json(data);
+}
+
 module.exports = {
   addUser,
   getUsers,
@@ -162,5 +170,6 @@ module.exports = {
   finderUser,
   getSetVirtual,
   rawQueries,
-  validationCont
+  validationCont,
+  oneToOne
 };
