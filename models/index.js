@@ -28,25 +28,23 @@ db.posts = require("./posts")(sequelize, DataTypes);
 db.tags = require('./tags')(sequelize , DataTypes);
 db.post_tag = require("./post_tag")(sequelize, DataTypes);
 
-
-db.user.hasMany(db.posts, { foreignKey: "userId", as: "postDetail" });
-db.posts.belongsTo(db.user, { foreignKey: "userId"});
-
-db.posts.belongsToMany(db.tags , {through:'posts_tags'});
-db.tags.belongsToMany(db.posts , {through:'posts_tags'});
-
-db.user.addScope('checkStatus' , {
-  where:{
-    status:1,
-    // gender:'female'
-  }
+db.user.addScope("checkStatus", {
+  where: {
+    status: 1,
+  },
 });
 
 db.user.addScope("checkGender", {
   where: {
-    gender:'male'
+    gender: "male",
   },
 });
+
+db.user.hasMany(db.posts, { foreignKey: "userId", as: "postDetail" });
+db.posts.belongsTo(db.user.scope('checkStatus'), { foreignKey: "userId"});
+
+db.posts.belongsToMany(db.tags , {through:'posts_tags'});
+db.tags.belongsToMany(db.posts , {through:'posts_tags'});
 
 db.sequelize.sync({ force: false });
 

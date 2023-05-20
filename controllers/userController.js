@@ -206,7 +206,12 @@ var manyToMany = async (req, res) => {
 };
 
 var scopes = async (req, res) => {
-  let data = await User.scope(['checkStatus' , 'checkGender']).findAll({});
+//   let data = await User.scope(['checkStatus' , 'checkGender']).findAll({});
+let data = await Posts.findAll({
+    include:[{
+        model:User
+    }]
+})
   res.status(200).json(data);
 }; 
 
