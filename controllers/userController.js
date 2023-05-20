@@ -177,6 +177,19 @@ var belongsTo = async(req , res) => {
     res.status(200).json(posts);
 }
 
+var oneToMany = async(req , res) => {
+   let data = await User.findAll({
+    attributes:['firstName' , 'gender'],
+     include: [{
+        model:Posts,
+        as:'postDetail',
+        attributes:['title' , ['name' , 'postName']]   // accessing name as postName
+     }],
+     where:{id:1}
+   });
+    res.status(200).json(data);
+}
+
 module.exports = {
   addUser,
   getUsers,
@@ -189,5 +202,6 @@ module.exports = {
   rawQueries,
   validationCont,
   oneToOne,
-  belongsTo
+  belongsTo,
+  oneToMany
 };

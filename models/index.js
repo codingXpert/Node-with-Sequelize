@@ -26,7 +26,7 @@ db.user = require("./user")(Model, sequelize, DataTypes);
 db.contact = require("./contact")(sequelize, DataTypes);
 db.posts = require("./posts")(sequelize, DataTypes);
 
-db.user.hasOne(db.posts, { foreignKey: "userId", as: "postDetail" });
+db.user.hasMany(db.posts, { foreignKey: "userId", as: "postDetail" });
 db.posts.belongsTo(db.user, { foreignKey: "userId"});
 
 db.sequelize.sync({ force: false });

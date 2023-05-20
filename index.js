@@ -22,6 +22,7 @@ app.get('/get-set-virtual' , userCtrl.getSetVirtual);
 app.get('/validation' , userCtrl.validationCont);
 app.get('/raw-queries', userCtrl.rawQueries);
 app.get('/one-to-one' , userCtrl.oneToOne);
+app.get("/one-to-many", userCtrl.oneToMany);
 app.get("/belongTo", userCtrl.belongsTo);
 
 app.listen(port, () => {
