@@ -2,6 +2,7 @@ const db = require('../models');
 const { Sequelize, Op, QueryTypes } = require("sequelize");
 const User = db.user;
 const Posts = db.posts;
+const Tags = db.tags;
 
 //Add User
 var addUser = async (req, res) => {
@@ -190,6 +191,13 @@ var oneToMany = async(req , res) => {
     res.status(200).json(data);
 }
 
+var manyToMany = async (req, res) => {
+  let data = await Posts.findAll({
+    include: {model: Tags}
+  });
+  res.status(200).json(data);
+};
+
 module.exports = {
   addUser,
   getUsers,
@@ -203,5 +211,6 @@ module.exports = {
   validationCont,
   oneToOne,
   belongsTo,
-  oneToMany
+  oneToMany,
+  manyToMany
 };

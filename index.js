@@ -23,6 +23,7 @@ app.get('/validation' , userCtrl.validationCont);
 app.get('/raw-queries', userCtrl.rawQueries);
 app.get('/one-to-one' , userCtrl.oneToOne);
 app.get("/one-to-many", userCtrl.oneToMany);
+app.get("/many-to-many", userCtrl.manyToMany);
 app.get("/belongTo", userCtrl.belongsTo);
 
 app.listen(port, () => {
