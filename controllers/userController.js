@@ -191,9 +191,16 @@ var oneToMany = async(req , res) => {
     res.status(200).json(data);
 }
 
+// var manyToMany = async (req, res) => {
+//   let data = await Posts.findAll({
+//     include: {model: Tags},
+//   });
+//   res.status(200).json(data);
+// };
+
 var manyToMany = async (req, res) => {
-  let data = await Posts.findAll({
-    include: {model: Tags}
+  let data = await Tags.findAll({
+    include: { model: Posts },
   });
   res.status(200).json(data);
 };
