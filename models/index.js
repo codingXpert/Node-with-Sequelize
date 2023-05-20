@@ -40,7 +40,21 @@ db.user.addScope("checkGender", {
   },
 });
 
-db.user.hasMany(db.posts, { foreignKey: "userId", as: "postDetail" });
+db.user.addScope("includePost", {
+  include: {
+    model: db.posts,
+  },
+});
+
+db.user.addScope("addUser", {
+  attributes: ['firstName' , 'lastName']
+});
+
+db.user.addScope("limitCheck", {
+  limit: 2,
+});
+
+db.user.hasMany(db.posts, { foreignKey: "userId"});
 db.posts.belongsTo(db.user.scope('checkStatus'), { foreignKey: "userId"});
 
 db.posts.belongsToMany(db.tags , {through:'posts_tags'});
