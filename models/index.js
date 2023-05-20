@@ -37,9 +37,16 @@ db.tags.belongsToMany(db.posts , {through:'posts_tags'});
 
 db.user.addScope('checkStatus' , {
   where:{
-    status:1
+    status:1,
+    // gender:'female'
   }
-})
+});
+
+db.user.addScope("checkGender", {
+  where: {
+    gender:'male'
+  },
+});
 
 db.sequelize.sync({ force: false });
 
