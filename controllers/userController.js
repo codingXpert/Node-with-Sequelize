@@ -205,6 +205,12 @@ var manyToMany = async (req, res) => {
   res.status(200).json(data);
 };
 
+var scopes = async (req, res) => {
+  let data = await User.scope('checkStatus').findAll({});
+  res.status(200).json(data);
+}; 
+
+
 module.exports = {
   addUser,
   getUsers,
@@ -219,5 +225,6 @@ module.exports = {
   oneToOne,
   belongsTo,
   oneToMany,
-  manyToMany
+  manyToMany,
+  scopes
 };

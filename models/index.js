@@ -33,7 +33,13 @@ db.user.hasMany(db.posts, { foreignKey: "userId", as: "postDetail" });
 db.posts.belongsTo(db.user, { foreignKey: "userId"});
 
 db.posts.belongsToMany(db.tags , {through:'posts_tags'});
-db.tags.belongsToMany(db.posts , {through:'posts_tags'})
+db.tags.belongsToMany(db.posts , {through:'posts_tags'});
+
+db.user.addScope('checkStatus' , {
+  where:{
+    status:1
+  }
+})
 
 db.sequelize.sync({ force: false });
 
