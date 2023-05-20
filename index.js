@@ -26,6 +26,7 @@ app.get("/one-to-many", userCtrl.oneToMany);
 app.get("/many-to-many", userCtrl.manyToMany);
 app.get("/belongTo", userCtrl.belongsTo);
 app.get("/scopes", userCtrl.scopes);
+app.get("/polymorphic", userCtrl.polymorphic);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

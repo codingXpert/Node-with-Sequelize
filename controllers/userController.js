@@ -3,6 +3,9 @@ const { Sequelize, Op, QueryTypes } = require("sequelize");
 const User = db.user;
 const Posts = db.posts;
 const Tags = db.tags;
+const Image = db.image;
+const Video = db.video;
+const Comment = db.comment;
 
 //Add User
 var addUser = async (req, res) => {
@@ -210,6 +213,33 @@ var scopes = async (req, res) => {
   res.status(200).json(data);
 }; 
 
+var polymorphic = async(req , res) => {
+    //-------image to comment--------//
+// let data = await Image.findAll({
+//     include:[{
+//         model:Comment
+//     }]
+// });
+
+//-----------video to comment---------//
+// let data = await Video.findAll({
+//   include: [
+//     {
+//       model: Comment,
+//     },
+//   ],
+// });
+
+//---------comment to video/image--------//
+let data = await Comment.findAll({
+  include: [
+    {
+      model: Video
+    },
+  ],
+});
+  res.status(200).json(data);
+}
 
 module.exports = {
   addUser,
@@ -226,5 +256,6 @@ module.exports = {
   belongsTo,
   oneToMany,
   manyToMany,
-  scopes
+  scopes,
+  polymorphic
 };
