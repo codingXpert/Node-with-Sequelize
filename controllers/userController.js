@@ -264,13 +264,15 @@ var polymorphicMany = async (req, res) => {
 };
 
 var loading = async (req, res) => {
-  //------Lazy loading----//
-  let data = await User.findOne({ where: { id: 1 } });
-  let postData = await data.getPosts();
-  let response = {
-    users: data,
-    posts: postData,
-  };
+  //-----Eager Loading------//
+   let data = await User.findOne({
+    include:Posts,
+     where: { id: 1 } 
+});
+   let response = {
+     users: data,
+   };
+
   res.status(200).json(response);
 };
 
