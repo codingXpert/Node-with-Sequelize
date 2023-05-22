@@ -27,6 +27,7 @@ db.contact = require("./contact")(sequelize, DataTypes);
 db.posts = require("./posts")(sequelize, DataTypes);
 db.tags = require('./tags')(sequelize , DataTypes);
 db.post_tag = require("./post_tag")(sequelize, DataTypes);
+db.tag_taggable = require("./tag_taggable")(sequelize, DataTypes);
 
 db.user.addScope("checkStatus", {
   where: {
@@ -91,6 +92,61 @@ db.comment.belongsTo(db.video, {
   constraints: false,
 });
 
+//---------Polymorphic-Many-To-Many--------//
+db.tag_taggable = require("./tag_taggable")(sequelize, DataTypes);
+
+//Image to tag
+db.image.belongsToMany(db.tags,{
+  through:{
+    model:db.tag_taggable,
+    unique:false,
+    scope:{
+      taggableType:'image'
+    }
+  },
+  foreignKey:'taggableId',
+  constraints:false
+});
+
+//tag to image
+db.tags.belongsToMany(db.image, {
+  through: {
+    model: db.tag_taggable,
+    unique: false,
+    scope: {
+      taggableType: "image",
+    },
+  },
+  foreignKey: "tagId",
+  constraints: false,
+});
+
+//Video To Tag
+db.video.belongsToMany(db.tags, {
+  through: {
+    model: db.tag_taggable,
+    unique: false,
+    scope: {
+      taggableType: "video",
+    },
+  },
+  foreignKey: "tagId",
+  constraints: false,
+});
+
+
+//Tag To Video
+db.tags.belongsToMany(db.video, {
+  through: {
+    model: db.tag_taggable,
+    unique: false,
+    scope: {
+      taggableType: "video",
+    },
+  },
+  foreignKey: "taggableId",
+  constraints: false,
+});
 db.sequelize.sync({ force: false });
 
 module.exports = db;

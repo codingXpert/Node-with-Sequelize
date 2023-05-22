@@ -241,6 +241,17 @@ let data = await Comment.findAll({
   res.status(200).json(data);
 }
 
+var polymorphicMany = async(req , res) => {
+    let data = await Image.findAll({
+      include: [
+        {
+          model: Tags,
+        },
+      ],
+    });
+    res.status(200).json(data);
+}
+
 module.exports = {
   addUser,
   getUsers,
@@ -257,5 +268,6 @@ module.exports = {
   oneToMany,
   manyToMany,
   scopes,
-  polymorphic
+  polymorphic,
+  polymorphicMany
 };
