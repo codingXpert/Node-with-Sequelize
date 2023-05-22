@@ -266,7 +266,10 @@ var polymorphicMany = async (req, res) => {
 var loading = async (req, res) => {
   //-----Eager Loading------//
    let data = await User.findOne({
-    include:Posts,
+    include:[{
+        required:true, // to change the default join(this applies inner join)
+        model:Posts
+    }],
      where: { id: 1 } 
 });
    let response = {
