@@ -28,6 +28,7 @@ db.posts = require("./posts")(sequelize, DataTypes);
 db.tags = require('./tags')(sequelize , DataTypes);
 db.post_tag = require("./post_tag")(sequelize, DataTypes);
 db.tag_taggable = require("./tag_taggable")(sequelize, DataTypes);
+db.student = require("./student")(sequelize, DataTypes);
 
 db.user.addScope("checkStatus", {
   where: {

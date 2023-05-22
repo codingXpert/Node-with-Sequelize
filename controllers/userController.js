@@ -273,7 +273,7 @@ var loading = async (req, res) => {
      where: { id: 1 } 
 });
    let response = {
-     users: data,
+     users: data
    };
 
   res.status(200).json(response);
