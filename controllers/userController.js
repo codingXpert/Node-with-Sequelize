@@ -242,13 +242,19 @@ let data = await Comment.findAll({
 }
 
 var polymorphicMany = async(req , res) => {
-    let data = await Image.findAll({
-      include: [
-        {
-          model: Tags,
-        },
-      ],
+    // let data = await Image.findAll({
+    //   include: [
+    //     {
+    //       model: Tags,
+    //     },
+    //   ],
+    // });
+
+    //------Tags to video or image
+    let data = await Tags.findAll({
+      include: [Video , Image]
     });
+
     res.status(200).json(data);
 }
 
