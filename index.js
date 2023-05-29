@@ -32,6 +32,7 @@ app.get('/loading' , userCtrl.loading);
 app.get("/paranoid", userCtrl.paranoid);
 app.get("/transaction" , userCtrl.transaction);
 app.get("/hooks", userCtrl.hooks);
+app.get("/queryInterfaceData", userCtrl.queryInterfaceData);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

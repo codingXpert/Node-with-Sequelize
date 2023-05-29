@@ -1,5 +1,5 @@
 const db = require("../models");
-const { Op, QueryTypes } = require("sequelize");
+const { Op, QueryTypes, DataTypes, STRING } = require("sequelize");
 const { sequelize } = require('../models/index');
 const User = db.user;
 const Posts = db.posts;
@@ -8,6 +8,7 @@ const Image = db.image;
 const Video = db.video;
 const Comment = db.comment;
 const Empolyees = db.employee;
+const queryInterface = sequelize.getQueryInterface();
 
 //Add User
 var addUser = async (req, res) => {
@@ -323,6 +324,17 @@ var hooks = async (req , res) => {
   res.status(200).json(data);
 }
 
+var queryInterfaceData = async(req , res) => {
+     queryInterface.createTable('avon' , {
+      name : DataTypes.STRING
+     });
+     queryInterface.addColumn('avon' , 'email' , {
+      type:DataTypes.STRING
+     })
+     let data = queryInterfaceData;
+     res.status(200).json(data);
+}
+
 module.exports = {
   addUser,
   getUsers,
@@ -344,5 +356,6 @@ module.exports = {
   loading,
   paranoid,
   transaction,
-  hooks
+  hooks,
+  queryInterfaceData,
 };
