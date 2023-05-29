@@ -281,12 +281,14 @@ var loading = async (req, res) => {
 };
 
 var paranoid = async (req , res) => {                // paranoid softDelete means record is deleted but still exists in db , we can't fetch it. To fetch this record we have use 'paranoid false'
-  // const data = await Empolyees.findAll({});
+  const data = await Empolyees.findAll({
+    paranoid:false
+  });
 
   //soft Deleting arecord
-  const data = await Empolyees.destroy({
-    where:{id:2}
-  });
+  // const data = await Empolyees.destroy({
+  //   where:{id:2}
+  // });
     res.status(200).json(data);
 }
 
