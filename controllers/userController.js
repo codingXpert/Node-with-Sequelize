@@ -318,6 +318,11 @@ var transaction = async (req , res) => {
   res.status(200).json(user);
 }
 
+var hooks = async (req , res) => {
+  let data = await User.create({firstName:'demo' , lastName:"demo" , email:"male"})
+  res.status(200).json(data);
+}
+
 module.exports = {
   addUser,
   getUsers,
@@ -339,4 +344,5 @@ module.exports = {
   loading,
   paranoid,
   transaction,
+  hooks
 };
