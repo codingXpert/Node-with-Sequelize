@@ -328,8 +328,14 @@ var queryInterfaceData = async(req , res) => {
      queryInterface.createTable('avon' , {
       name : DataTypes.STRING
      });
-     queryInterface.addColumn('avon' , 'email' , {
-      type:DataTypes.STRING
+
+    //  queryInterface.addColumn('avon' , 'email' , {
+    //   type:DataTypes.STRING
+    //  });
+
+     queryInterface.changeColumn('avon' , 'email' , {
+      type:DataTypes.STRING,
+      defaultValue:'test@gmail.com'
      })
      let data = queryInterfaceData;
      res.status(200).json(data);
