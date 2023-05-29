@@ -336,7 +336,10 @@ var queryInterfaceData = async(req , res) => {
      queryInterface.changeColumn('avon' , 'email' , {
       type:DataTypes.STRING,
       defaultValue:'test@gmail.com'
-     })
+     });
+
+     queryInterface.removeColumn('avon' , 'email');
+     
      let data = queryInterfaceData;
      res.status(200).json(data);
 }
