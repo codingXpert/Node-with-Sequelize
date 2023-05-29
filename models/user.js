@@ -41,16 +41,20 @@ User.init({
     }
   },
 }, {
- hooks:{
-   beforeValidate:(user, option)=>{
-    user.firstName = 'dummy'
-   },
-   afterValidate:(user , option) =>{
-    user.firstName = 'ramesh'
-   }
- },
+//  hooks:{
+//    beforeValidate:(user, option)=>{
+//     user.firstName = 'dummy'
+//    },
+//    afterValidate:(user , option) =>{
+//     user.firstName = 'ramesh'
+//    }
+//  },
   sequelize, // We need to pass the connection instance
   modelName: 'User' // We need to choose the model name
+});
+
+User.addHook("beforeValidate" , "customName" , (user , option)=>{
+  user.firstName = 'newHook'
 });
 return User;
 }
