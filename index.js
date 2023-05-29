@@ -30,6 +30,7 @@ app.get("/polymorphic", userCtrl.polymorphic);
 app.get("/polymorphic-many", userCtrl.polymorphicMany);
 app.get('/loading' , userCtrl.loading);
 app.get("/paranoid", userCtrl.paranoid);
+app.get("/transaction" , userCtrl.transaction)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

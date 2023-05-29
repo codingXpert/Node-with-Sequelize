@@ -1,5 +1,6 @@
 const db = require("../models");
-const { Sequelize, Op, QueryTypes } = require("sequelize");
+const { Op, QueryTypes } = require("sequelize");
+const { sequelize } = require('../models/index');
 const User = db.user;
 const Posts = db.posts;
 const Tags = db.tags;
@@ -293,6 +294,23 @@ var paranoid = async (req , res) => {                // paranoid softDelete mean
     res.status(200).json(data);
 }
 
+var transaction = async (req , res) => {
+  let user;
+  const t = await sequelize.transaction() ;
+  try {
+     user = await User.create({firstName: 'roushani' , lastName: 'kumari' , gender:'female'},{   // if every thing is right commit otherwise rollback
+      transaction:t
+    });
+    console.log("commit");
+    t.commit();
+
+  } catch (error) {
+    console.log("rollback");
+    t.rollback(); 
+  }
+  res.status(200).json(user);
+}
+
 module.exports = {
   addUser,
   getUsers,
@@ -312,5 +330,6 @@ module.exports = {
   polymorphic,
   polymorphicMany,
   loading,
-  paranoid
+  paranoid,
+  transaction,
 };
