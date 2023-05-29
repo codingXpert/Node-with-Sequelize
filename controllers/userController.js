@@ -297,17 +297,24 @@ var paranoid = async (req , res) => {                // paranoid softDelete mean
 var transaction = async (req , res) => {
   let user;
   const t = await sequelize.transaction() ;
-  try {
-     user = await User.create({firstName: 'roushani' , lastName: 'kumari' , gender:'female'},{   // if every thing is right commit otherwise rollback
-      transaction:t
-    });
-    console.log("commit");
-    t.commit();
+  // try {
+  //    user = await User.create({firstName: 'roushani' , lastName: 'kumari' , gender:'female'},{   // if every thing is right commit otherwise rollback
+  //     transaction:t
+  //   });
+  //   console.log("commit");
+  //   t.commit();
 
-  } catch (error) {
-    console.log("rollback");
-    t.rollback(); 
-  }
+  // } catch (error) {
+  //   console.log("rollback");
+  //   t.rollback(); 
+  // }
+
+
+  //fetching the record using transaction 
+   user = await User.findAll({
+    transaction:t,
+    Lock:true
+   })
   res.status(200).json(user);
 }
 
