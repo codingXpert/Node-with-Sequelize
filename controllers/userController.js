@@ -325,20 +325,22 @@ var hooks = async (req , res) => {
 }
 
 var queryInterfaceData = async(req , res) => {
-     queryInterface.createTable('avon' , {
-      name : DataTypes.STRING
-     });
+    //  queryInterface.createTable('avon' , {
+    //   name : DataTypes.STRING
+    //  });
 
     //  queryInterface.addColumn('avon' , 'email' , {
     //   type:DataTypes.STRING
     //  });
 
-     queryInterface.changeColumn('avon' , 'email' , {
-      type:DataTypes.STRING,
-      defaultValue:'test@gmail.com'
-     });
+    //  queryInterface.changeColumn('avon' , 'email' , {
+    //   type:DataTypes.STRING,
+    //   defaultValue:'test@gmail.com'
+    //  });
 
-     queryInterface.removeColumn('avon' , 'email');
+    //  queryInterface.removeColumn('avon' , 'email');
+
+     queryInterface.dropTable('avon');
      
      let data = queryInterfaceData;
      res.status(200).json(data);
