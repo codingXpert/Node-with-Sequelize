@@ -6,6 +6,7 @@ const Tags = db.tags;
 const Image = db.image;
 const Video = db.video;
 const Comment = db.comment;
+const Empolyees = db.employee;
 
 //Add User
 var addUser = async (req, res) => {
@@ -279,6 +280,16 @@ var loading = async (req, res) => {
   res.status(200).json(response);
 };
 
+var paranoid = async (req , res) => {                // paranoid softDelete means record is deleted but still exists in db , we can't fetch it. To fetch this record we have use 'paranoid false'
+  // const data = await Empolyees.findAll({});
+
+  //soft Deleting arecord
+  const data = await Empolyees.destroy({
+    where:{id:2}
+  });
+    res.status(200).json(data);
+}
+
 module.exports = {
   addUser,
   getUsers,
@@ -298,4 +309,5 @@ module.exports = {
   polymorphic,
   polymorphicMany,
   loading,
+  paranoid
 };

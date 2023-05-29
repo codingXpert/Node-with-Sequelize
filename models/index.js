@@ -66,6 +66,7 @@ db.tags.belongsToMany(db.posts , {through:'posts_tags'});
 db.comment = require("./comment")(sequelize, DataTypes);
 db.video = require("./video")(sequelize, DataTypes);
 db.image = require("./image")(sequelize, DataTypes);
+db.employee = require("./employees")(sequelize, DataTypes);
 
 db.image.hasMany(db.comment , {
   foreignKey:'commentableId',
